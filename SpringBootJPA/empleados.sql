@@ -56,12 +56,3 @@ CREATE TABLE `empleados` (
   `dtos_laborales_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
   ) ;
-
-
-
-
-
-
-
-
-
