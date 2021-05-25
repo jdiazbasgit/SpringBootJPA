@@ -1,4 +1,4 @@
-package curso.allianz.jpa.enitidaddes;
+package curso.allianz.jpa.enitidades;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

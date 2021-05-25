@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+
+	<security:http pattern="/" security="none" />
+	<security:http pattern="/login" security="none" />
+	<security:http pattern="/alta" security="none" />
+	<security:http pattern="/altaUsuario" security="none" />
+
+	<security:http auto-config="true">
+
+		<security:intercept-url pattern="/*" access="ROLE_USER" />
+
+
+
+
+		<security:form-login login-page="/login"
+			password-parameter="clave" username-parameter="usuario"
+			default-target-url="/protegido" authentication-failure-url="/login?error=error de autenticacion"
+			login-processing-url="/autenticar" />
+
+		<security:logout logout-url="/adios"
+			logout-success-url="/login" />
+
+	</security:http>
+
+
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="myUserDetailsService">
+		<security:password-encoder hash="bcrypt"></security:password-encoder>
+		</security:authentication-provider>
+
+
+	</security:authentication-manager>
+
+	<bean class="curso.spring.security.services.MyUserDetailsService" id="myUserDetailsService"></bean>
+
+	<bean id="dataSourceMio"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/curso"></property>
+		<property name="username" value="curso"></property>
+		<property name="password" value="cursocurso"></property>
+
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceMio" />
+		<property name="packagesToScan" value="curso.spring.security.model">
+
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQL5Dialect
+				</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+
+
+
+</beans>
+
+
+
+
+
+
+
+

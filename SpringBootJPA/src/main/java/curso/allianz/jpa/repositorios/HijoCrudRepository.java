@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import curso.allianz.jpa.enitidaddes.Hijo;
+import curso.allianz.jpa.enitidades.Hijo;
 
 public interface HijoCrudRepository extends CrudRepository<Hijo, Integer> {
 

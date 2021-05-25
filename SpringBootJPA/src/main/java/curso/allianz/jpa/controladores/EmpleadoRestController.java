@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import curso.allianz.jpa.enitidaddes.Empleado;
+import curso.allianz.jpa.enitidades.Empleado;
 import curso.allianz.jpa.repositorios.EmpleadoCrudRepository;
 
 @RestController

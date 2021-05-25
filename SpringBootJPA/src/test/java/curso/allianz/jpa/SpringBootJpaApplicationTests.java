@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import curso.allianz.jpa.enitidaddes.Empleado;
-import curso.allianz.jpa.enitidaddes.Hijo;
+import curso.allianz.jpa.enitidades.Empleado;
+import curso.allianz.jpa.enitidades.Hijo;
 import curso.allianz.jpa.repositorios.EmpleadoCrudRepository;
 import curso.allianz.jpa.repositorios.HijoCrudRepository;
 
