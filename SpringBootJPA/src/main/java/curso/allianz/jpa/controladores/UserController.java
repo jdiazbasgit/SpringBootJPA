@@ -1,37 +1,45 @@
 package curso.allianz.jpa.controladores;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import curso.allianz.concierto.excepciones.InstrumentoRotoException;
+import curso.allianz.concierto.springbootstarter.service.AllianzConciertoService;
 import curso.allianz.jpa.dtos.UserDto;
 import curso.allianz.jpa.enitidades.Authority;
 import curso.allianz.jpa.enitidades.Usuario;
 import curso.allianz.jpa.repositorios.UsuarioCrudRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.Data;
 
 @RestController
-
+@Data
 public class UserController {
 
 	
 	@Autowired
 	private UsuarioCrudRepository repository;
+	
+	@Autowired
+	private AllianzConciertoService allianzConciertoService;
 
 	@GetMapping({ "/", "/login" })
 	public String index() {
+		try {
+			getAllianzConciertoService().tocaHombreOrquesta();
+		} catch (InstrumentoRotoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "index";
 	}
 
@@ -73,11 +81,5 @@ public class UserController {
 		return "Bearer " + token;
 	}
 
-	public UsuarioCrudRepository getRepository() {
-		return repository;
-	}
-
-	public void setRepository(UsuarioCrudRepository repository) {
-		this.repository = repository;
-	}
+	
 }

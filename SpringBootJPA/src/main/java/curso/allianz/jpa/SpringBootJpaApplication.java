@@ -6,10 +6,13 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication 
-@ComponentScan({"curso.allianz"})
+@ComponentScan({"curso.allianz.concierto"})
 public class SpringBootJpaApplication extends SpringBootServletInitializer{
+	
+	
 
 	public static void main(String[] args) {
+	
 		SpringApplication.run(SpringBootJpaApplication.class, args);
 	}
 

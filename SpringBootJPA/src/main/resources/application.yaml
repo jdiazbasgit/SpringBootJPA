@@ -25,4 +25,23 @@ spring:
   resources:
     static-locations:
     - resources
-    
+
+allianz:
+  concierto:
+      sonido:
+        guitarra: tlan, tlan, tlan yaml
+        trompeta: tuuu, tuuu, tuuu yaml
+        tambor: pom, pom, pom yaml
+      qualifier:
+        instrumento-solista: trompeta
+        instrumento-hombreombreorquesta: tocameAMi
+        tambor: tocameAMi
+        guitarra: tocameAMi
+        
+      nombre:
+        guitarra: guitarra
+        tambor: tambor
+        trompeta: trompeta
+       
+      
+     
