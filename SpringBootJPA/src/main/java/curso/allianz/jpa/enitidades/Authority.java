@@ -11,7 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name = "Authorities")
-public class Authority implements GrantedAuthority {
+public class Authority {//implements GrantedAuthority {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

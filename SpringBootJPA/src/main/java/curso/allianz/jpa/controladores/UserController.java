@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import curso.allianz.concierto.excepciones.InstrumentoRotoException;
-import curso.allianz.concierto.springbootstarter.service.AllianzConciertoService;
 import curso.allianz.jpa.dtos.UserDto;
 import curso.allianz.jpa.enitidades.Authority;
 import curso.allianz.jpa.enitidades.Usuario;
@@ -29,17 +27,10 @@ public class UserController {
 	@Autowired
 	private UsuarioCrudRepository repository;
 	
-	@Autowired
-	private AllianzConciertoService allianzConciertoService;
-
+	
 	@GetMapping({ "/", "/login" })
 	public String index() {
-		try {
-			getAllianzConciertoService().tocaHombreOrquesta();
-		} catch (InstrumentoRotoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		return "index";
 	}
 
