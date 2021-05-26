@@ -9,9 +9,12 @@ import javax.persistence.Table;
 
 import org.springframework.data.rest.core.annotation.RestResource;
 
+import lombok.Data;
+
 @Entity
 @Table(name="cargos")
 @RestResource(path = "/cargos", rel = "cargo")
+@Data
 public class Cargo {
 	
 	@Id
@@ -22,20 +25,6 @@ public class Cargo {
 	
 	private String descripcion;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+	
 
 }

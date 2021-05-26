@@ -17,10 +17,20 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.repository.cdi.Eager;
 import org.springframework.data.rest.core.annotation.RestResource;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "empleados")
 @RestResource(path = "/empleados", rel = "empleado")
+@Data
 public class Empleado {
+	
+
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO )
 	//@GeneratedValue(strategy = GenerationType.SEQUENCE )
@@ -45,73 +55,6 @@ public class Empleado {
 	private DatoPersonal datoPersonal;
 
 
-	public int getId() {
-		return id;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-
-	public String getNombre() {
-		return nombre;
-	}
-
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-
-	public String getDni() {
-		return dni;
-	}
-
-
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
-
-
-	public GregorianCalendar getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-
-	public void setFechaNacimiento(GregorianCalendar fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-
-
-	public DatoLaboral getDatoLaboral() {
-		return datoLaboral;
-	}
-
-
-	public void setDatoLaboral(DatoLaboral datoLaboral) {
-		this.datoLaboral = datoLaboral;
-	}
-
-
-	public DatoPersonal getDatoPersonal() {
-		return datoPersonal;
-	}
-
-
-	public void setDatoPersonal(DatoPersonal datoPersonal) {
-		this.datoPersonal = datoPersonal;
-	}
+	
 
 }

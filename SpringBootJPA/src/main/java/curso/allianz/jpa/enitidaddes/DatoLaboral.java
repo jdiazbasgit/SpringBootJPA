@@ -13,9 +13,12 @@ import javax.persistence.Table;
 
 import org.springframework.data.rest.core.annotation.RestResource;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "datos_laborales")
 @RestResource(path = "/datosLaborales", rel = "datoLaboral")
+@Data
 public class DatoLaboral
 {
 	@Id
@@ -32,36 +35,5 @@ public class DatoLaboral
 	@JoinColumn(name = "cargos_id")
 	private Cargo cargo;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public GregorianCalendar getFechaAlta() {
-		return fechaAlta;
-	}
-
-	public void setFechaAlta(GregorianCalendar fechaAlta) {
-		this.fechaAlta = fechaAlta;
-	}
-
-	public Cargo getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(Cargo cargo) {
-		this.cargo = cargo;
-	}
-
-	public int getSalario() {
-		return salario;
-	}
-
-	public void setSalario(int salario) {
-		this.salario = salario;
-	}
-
+	
 }

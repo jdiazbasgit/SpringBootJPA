@@ -1,5 +1,7 @@
 package curso.allianz.jpa.enitidaddes;
 
+import java.util.GregorianCalendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,9 +12,12 @@ import javax.persistence.Table;
 
 import org.springframework.data.rest.core.annotation.RestResource;
 
+import lombok.Data;
+
 @Entity
 @Table(name="hijos")
 @RestResource(path = "/hijos", rel = "hijo")
+@Data
 public class Hijo {
 	
 	@Id
@@ -26,28 +31,8 @@ public class Hijo {
 	
 	private int chicas;
 
-	public int getId() {
-		return id;
-	}
+	
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getChicos() {
-		return chicos;
-	}
-
-	public void setChicos(int chicos) {
-		this.chicos = chicos;
-	}
-
-	public int getChicas() {
-		return chicas;
-	}
-
-	public void setChicas(int chicas) {
-		this.chicas = chicas;
-	}
+	
 
 }
