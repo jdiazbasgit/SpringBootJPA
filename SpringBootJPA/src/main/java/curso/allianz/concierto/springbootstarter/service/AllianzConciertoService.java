@@ -1,12 +1,13 @@
 package curso.allianz.concierto.springbootstarter.service;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import curso.allianz.concierto.excepciones.InstrumentoRotoException;
 import curso.allianz.concierto.instrumentos.Instrumento;
+import curso.allianz.concierto.instrumentos.InstrumentoInterface;
 import curso.allianz.concierto.instrumentos.Tambor;
 import curso.allianz.concierto.musicos.HombreOrquesta;
 import curso.allianz.concierto.musicos.Solista;
@@ -37,24 +38,29 @@ public class AllianzConciertoService {
 		
 		Instrumento instrumentoSolista=(Instrumento) Class.forName(INSTRUMENTOS_PROPIEDADES+getInstrumentos().getInstrumentoSolista()).newInstance();
 		Method metodoSonido=instrumentoSolista.getClass().getMethod("setSonido", String.class);
-		
-	
 		Method getSonido =sonidos.getClass().getMethod("get"+getInstrumentos().getInstrumentoSolista());
 		String sonido=(String) getSonido.invoke(sonidos);
-		
 		metodoSonido.invoke(instrumentoSolista, sonido);
 		getSolista().setInstrumento(instrumentoSolista);
 		getSolista().tocar();
-		
 	}
 
-	public void tocaHombreOrquesta() throws InstrumentoRotoException {
-		//getHombreOrquesta().tocar();
+	public void tocaHombreOrquesta() throws Exception {
+		List<String> instrumentosString=getInstrumentos().getInstrumentosHombreombreorquesta();
+		List<InstrumentoInterface> instrumentos= new ArrayList<InstrumentoInterface>();
+		for (String instrumentoString : instrumentosString) {
+			Instrumento instrumento= (Instrumento) Class.forName(INSTRUMENTOS_PROPIEDADES+instrumentoString).newInstance();
+			Method getSonido =sonidos.getClass().getMethod("get"+instrumentoString);
+			String sonido=(String) getSonido.invoke(sonidos);
+			instrumento.setSonido(sonido);
+			instrumentos.add(instrumento);
+		}
+		getHombreOrquesta().setInstrumentos(instrumentos);
+		getHombreOrquesta().tocar();
 	}
 
 	public AllianzConciertoService(AllianzConciertoInstrumentosProperties instrumentos,
 			AllianzConciertoSonidosProperties sonidos) {
-		super();
 		this.instrumentos = instrumentos;
 		this.sonidos = sonidos;
 	}
