@@ -8,11 +8,13 @@ import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Table(name = "Authorities")
 @Data
+@AllArgsConstructor
 public class Authority {
 	
 	@Id

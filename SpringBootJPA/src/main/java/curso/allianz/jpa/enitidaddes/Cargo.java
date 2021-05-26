@@ -9,12 +9,15 @@ import javax.persistence.Table;
 
 import org.springframework.data.rest.core.annotation.RestResource;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Table(name="cargos")
 @RestResource(path = "/cargos", rel = "cargo")
 @Data
+@AllArgsConstructor
+
 public class Cargo {
 	
 	@Id

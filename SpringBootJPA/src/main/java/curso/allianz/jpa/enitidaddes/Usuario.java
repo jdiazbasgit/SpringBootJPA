@@ -12,11 +12,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Table(name = "usuarios")
 @Data
+@AllArgsConstructor
+
 public class Usuario {
 	
 	@Id

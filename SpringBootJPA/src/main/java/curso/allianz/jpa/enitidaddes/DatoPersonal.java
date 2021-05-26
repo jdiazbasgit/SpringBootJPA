@@ -15,12 +15,15 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GeneratorType;
 import org.springframework.data.rest.core.annotation.RestResource;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Table(name = "datos_personales")
 @RestResource(path = "/datosPersonales", rel = "datoPersonal")
 @Data
+@AllArgsConstructor
+
 public class DatoPersonal {
 	
 	@Id

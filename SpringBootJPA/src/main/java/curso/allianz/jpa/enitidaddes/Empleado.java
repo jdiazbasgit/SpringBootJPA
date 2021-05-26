@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.repository.cdi.Eager;
 import org.springframework.data.rest.core.annotation.RestResource;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,8 @@ import lombok.Setter;
 @Table(name = "empleados")
 @RestResource(path = "/empleados", rel = "empleado")
 @Data
+@AllArgsConstructor
+
 public class Empleado {
 	
 
