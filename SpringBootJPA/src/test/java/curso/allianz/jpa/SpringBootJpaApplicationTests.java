@@ -29,9 +29,8 @@ public class SpringBootJpaApplicationTests {
 	@Test
 	public void altaHijo() {
 		
-		Hijo hijo= new Hijo();
-		hijo.setChicos(5);
-		hijo.setChicas(6);
+		Hijo hijo= new Hijo(0,5,6);
+		
 		System.err.println(getHijoCrudRepository());
 		assertNotNull(getHijoCrudRepository().save(hijo));
 		
