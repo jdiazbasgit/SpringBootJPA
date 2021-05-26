@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=
+curso.allianz.concierto.springbootstarter.config.AllianzConciertoAutoConfigure
