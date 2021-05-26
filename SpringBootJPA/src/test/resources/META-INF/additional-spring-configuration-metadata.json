@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "allianz.custom",
+    "type": "java.lang.String",
+    "description": "A description for 'allianz.custom'"
+  },
+  {
+    "name": "allianz.custom",
+    "type": "java.lang.String",
+    "description": "A description for 'allianz.custom'"
+  },
+  {
+    "name": "allianz.custom.prefix",
+    "type": "java.lang.String",
+    "description": "A description for 'allianz.custom.prefix'"
+  },
+  {
+    "name": "allianz.custom.enable",
+    "type": "java.lang.String",
+    "description": "A description for 'allianz.custom.enable'"
+  }
+]}

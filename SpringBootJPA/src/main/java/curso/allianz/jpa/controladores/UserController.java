@@ -1,80 +1,45 @@
 package curso.allianz.jpa.controladores;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
+import curso.allianz.cursom.service.AllianzService;
 import curso.allianz.jpa.dtos.UserDto;
-import curso.allianz.jpa.enitidaddes.Authority;
 import curso.allianz.jpa.repositorios.UsuarioRepository;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.Data;
 
-@RestController
+@Controller
+@Data
 public class UserController {
 
 	@Autowired
 	private UsuarioRepository   usuarioRepository;
+	
+	@Autowired
+	private AllianzService service;
+	
 	@PostMapping("user")
 	public Optional<UserDto> login(@RequestParam("user") String  username, @RequestParam("password") String pwd) {
 		
-		UserDto user=null;
-		
-		BCryptPasswordEncoder bcrypt= new BCryptPasswordEncoder();
-		
-		if(username.equals(getUsuarioRepository().findUserByUser(username).getUsername()) && bcrypt.matches( pwd,getUsuarioRepository().findUserByUser(username).getPassword()))
-		{
-			
-			String token = getJWTToken(username,getUsuarioRepository().findUserByUser(username).getAuthorities());
-			 user = new UserDto();
-			user.setUser(username);
-			user.setToken(token);
-			user.setRol(getUsuarioRepository().findUserByUser(username).getAuthorities());
-			
-		}
 		
 		
-		//if(user==null)
-			//return response.SC_UNAUTHORIZED;
-		return Optional.ofNullable(user);
+		
+		return null;
 		
 	}
-
-	private String getJWTToken(String username, List<Authority> roles) {
-		String secretKey = "allianz";
+	
+	@GetMapping("algo")
+	public String algo() {
+		getService().escribir("estoy en un  curso");
 		
-		
-		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-		
-		
-		String token = Jwts
-				.builder()
-				.setId("cursoJWT")
-				.setSubject(username)
-				.claim("authorities",grantedAuthorities)
-				.setExpiration(new Date(System.currentTimeMillis() + 600000))
-				.signWith(SignatureAlgorithm.HS512,
-						secretKey.getBytes()).compact();
-
-		return "Bearer " + token;
+		return "home";
 	}
 
-	public UsuarioRepository getUsuarioRepository() {
-		return usuarioRepository;
-	}
-
-	public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
-		this.usuarioRepository = usuarioRepository;
-	}
+	
+	
 }
