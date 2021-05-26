@@ -1,22 +1,23 @@
 package curso.allianz.jpa.controladores;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import cap.curso.accesos.DTOs.User;
-import cap.curso.accesos.repositorios.UsuarioRepository;
+import curso.allianz.jpa.dtos.UserDto;
+import curso.allianz.jpa.enitidaddes.Authority;
+import curso.allianz.jpa.repositorios.UsuarioRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -26,20 +27,20 @@ public class UserController {
 	@Autowired
 	private UsuarioRepository   usuarioRepository;
 	@PostMapping("user")
-	public Optional<User> login(@RequestParam("user") String  username, @RequestParam("password") String pwd) {
+	public Optional<UserDto> login(@RequestParam("user") String  username, @RequestParam("password") String pwd) {
 		
-		User user=null;
+		UserDto user=null;
 		
 		BCryptPasswordEncoder bcrypt= new BCryptPasswordEncoder();
 		
-		if(username.equals(getUsuarioRepository().findUserByUser(username).getUser()) && bcrypt.matches( pwd,getUsuarioRepository().findUserByUser(username).getPassword()))
+		if(username.equals(getUsuarioRepository().findUserByUser(username).getUsername()) && bcrypt.matches( pwd,getUsuarioRepository().findUserByUser(username).getPassword()))
 		{
 			
-			String token = getJWTToken(username,getUsuarioRepository().findUserByUser(username).getRol().getRol());
-			 user = new User();
+			String token = getJWTToken(username,getUsuarioRepository().findUserByUser(username).getAuthorities());
+			 user = new UserDto();
 			user.setUser(username);
 			user.setToken(token);
-			user.setRol(getUsuarioRepository().findUserByUser(username).getRol().getRol());
+			user.setRol(getUsuarioRepository().findUserByUser(username).getAuthorities());
 			
 		}
 		
@@ -50,20 +51,18 @@ public class UserController {
 		
 	}
 
-	private String getJWTToken(String username, String rol) {
-		String secretKey = "cursocap";
-		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-				.commaSeparatedStringToAuthorityList(rol);
+	private String getJWTToken(String username, List<Authority> roles) {
+		String secretKey = "allianz";
+		
+		
+		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+		
 		
 		String token = Jwts
 				.builder()
 				.setId("cursoJWT")
 				.setSubject(username)
-				.claim("authorities",
-						grantedAuthorities.stream()
-								.map(GrantedAuthority::getAuthority)
-								.collect(Collectors.toList()))
-				.setIssuedAt(new Date(System.currentTimeMillis()))
+				.claim("authorities",grantedAuthorities)
 				.setExpiration(new Date(System.currentTimeMillis() + 600000))
 				.signWith(SignatureAlgorithm.HS512,
 						secretKey.getBytes()).compact();
