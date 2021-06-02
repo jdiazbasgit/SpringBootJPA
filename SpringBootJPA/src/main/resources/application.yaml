@@ -14,3 +14,4 @@ allianz:
     enable: true
     prefix: prefijo
     suffix: sufijo
+spring.data.rest.basePath: /api
